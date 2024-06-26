@@ -1,0 +1,93 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  font-family: "Courier New", Courier, monospace;
+}
+:root {
+  --text: rgb(78, 78, 78);
+  --found: #0df5f9;
+  --found2: chartreuse;
+}
+
+#mains {
+  border: 1px solid grey;
+  height: 70vh;
+  place-content: center;
+  place-items: center;
+  width: 60vw;
+  margin: 5em auto;
+  display: flex;
+  flex-direction: column;
+}
+
+#agregar {
+  display: flex;
+  place-content: center;
+  padding: 10px;
+  width: 50vw;
+  margin: auto;
+  position: relative;
+  flex-wrap: wrap;
+  top: 10rem;
+  text-transform: capitalize;
+  color: chartreuse;
+  font-weight: bold;
+}
+
+#formulario {
+  display: flex;
+  place-content: center;
+  place-items: center;
+  gap: 1em;
+  width: 100vw;
+  flex-direction: column;
+  margin: 10em 0;
+  text-transform: uppercase;
+  & ul:nth-child(n) {
+    display: flex;
+    margin: 10px 0;
+    gap: 0.6em;
+    & li::before {
+      text-align: center;
+      place-items: center;
+      place-content: center;
+      content: "💡";
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      background-color: var(--found);
+      margin-right: 10px;
+      border-radius: 50%;
+      color: var(--text);
+      font-weight: bold;
+    }
+    & input {
+      background: transparent;
+      border: 1px solid transparent;
+    }
+  }
+  & ul:nth-child(3) {
+    gap: 1.8rem;
+  }
+  #boton {
+    width: 12vw;
+    height: 5vh;
+    display: flex;
+    place-content: center;
+    place-items: center;
+    background: var(--found2);
+    border: transparent;
+    border-radius: 5px;
+    box-shadow: grey 1px 1px 2px;
+  }
+  #boton:hover {
+    font-weight: bold;
+    box-shadow: inset grey 1px 1px 2px;
+  }
+}
+#result {
+  color: blue;
+  position: absolute;
+  top: 33em;
+}
