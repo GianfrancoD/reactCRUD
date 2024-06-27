@@ -16,6 +16,14 @@ export const Form = () => {
     console.log(formulario);
     setDatas([...formdatas, formulario]);
     setFormulario({ nombre: "", correo: "", edad: "" });
+
+    fetch("http://127.0.0.1:5000/admin", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(formulario),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
   };
 
   const truncar = (username) => {
@@ -71,7 +79,7 @@ export const Form = () => {
         />
       </header>
       <main id="mains">
-        <form action="" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <header id="agregar">
             <h1>agregar</h1>
           </header>
