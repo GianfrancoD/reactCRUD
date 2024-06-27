@@ -82,6 +82,9 @@ export const Form = () => {
                 required
                 type="text"
                 value={formulario.correo}
+                minLength={2}
+                maxLength={100}
+                pattern="^(?![0-9])([a-zA-Z0-9._%+ñáéíóú]+)@gmail\.com$"
                 placeholder=" Escribir correo.."
                 onChange={(e) => {
                   setFormulario({ ...formulario, correo: e.target.value });
@@ -95,6 +98,8 @@ export const Form = () => {
                 required
                 type="text"
                 placeholder=" Escribir Nombre.."
+                pattern="[a-zA-Z]+"
+                maxLength={11}
                 value={formulario.nombre}
                 onChange={(e) => {
                   setFormulario({ ...formulario, nombre: e.target.value });
@@ -107,6 +112,7 @@ export const Form = () => {
               <input
                 required
                 type="number"
+                pattern="[0-9]+"
                 placeholder=" Escribir edad.."
                 value={formulario.edad}
                 onChange={(e) => {
@@ -124,7 +130,9 @@ export const Form = () => {
                 Existe un total de: <b id="total">{formdatas.length}</b>
               </p>
             ) : (
-              <p>No hay datos, ingrese datos para ver resultados.</p>
+              <p style={{ color: "red" }}>
+                No hay datos, ingrese datos para ver resultados.
+              </p>
             )}
             <tr>
               <th>Nombre</th>
