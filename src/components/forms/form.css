@@ -10,9 +10,35 @@
   --found2: chartreuse;
 }
 
+span {
+  margin: 10px;
+  left: 35rem;
+  position: absolute;
+  color: gray;
+}
+
+.headersearch {
+  display: flex;
+  place-items: center;
+  place-content: center;
+  position: relative;
+  top: 1em;
+  input[type="search"] {
+    padding: 0.7em;
+    width: 20rem;
+    border-radius: 0.5em;
+    border: 0.1rem solid gray;
+    text-align: center;
+    color: gray;
+  }
+}
+
 #mains {
   border: 1px solid grey;
-  height: 70vh;
+
+  box-shadow: gray 1px 1px 2px;
+  border-radius: 0.4rem;
+  height: 55vh;
   place-content: center;
   place-items: center;
   width: 60vw;
@@ -86,8 +112,57 @@
     box-shadow: inset grey 1px 1px 2px;
   }
 }
-#result {
-  color: blue;
+table {
+  color: #337ab7;
+  display: flex;
+  width: 100vw;
+  flex-direction: column;
+  place-content: center;
+  place-items: center;
   position: absolute;
-  top: 33em;
+  top: 38rem;
+
+  th,
+  td {
+    flex: 1;
+    padding: 15px;
+    width: 23vw;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    background: white;
+  }
+  th {
+    background-color: #f8f8f8;
+    font-weight: bold;
+  }
+  button {
+    margin: 5px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+  #botones {
+    width: 7vw;
+    height: 4vh;
+    display: flex;
+    place-content: center;
+    place-items: center;
+    background: var(--found2);
+    border: transparent;
+    border-radius: 5px;
+    box-shadow: grey 1px 1px 2px;
+  }
+  #botones:hover {
+    font-weight: bold;
+    box-shadow: inset grey 1px 1px 2px;
+  }
+  tbody {
+    td:nth-child(4) {
+      display: flex;
+    }
+  }
+  #total {
+    font-size: 1.5em;
+    margin: 0.5em;
+  }
 }
