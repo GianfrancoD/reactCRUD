@@ -53,7 +53,7 @@ def registrados():
         data = [{"id": user.id, "nombre": user.nombre, "correo": user.correo, "edad": user.edad} for user in users]
         return jsonify(data)
     
-@app.route('/delete', methods=['DELETE'])
+@app.route('/delete/<int:user_id>', methods=['DELETE'])
 def eliminar_usuarios(user_id):
     if request.method == 'DELETE':
         session = Session()
@@ -64,7 +64,7 @@ def eliminar_usuarios(user_id):
             session.close()
             return jsonify({'message': 'Usuario Eliminado Correctamente'})
     
-@app.route('/usuarios/<user_id>', methods=['PUT'])
+@app.route('/usuarios/<int:user_id>', methods=['PUT'])
 def actualizar_usuarios(user_id):
     if request.method == 'PUT':
         session = Session()

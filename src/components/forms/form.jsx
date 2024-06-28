@@ -46,15 +46,44 @@ export const Form = () => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    setDatas(
-      formdatas.map((form, i) => (i === edit ? { ...formulario } : form))
-    );
-    setEdit(null);
-    setFormulario({ nombre: "", correo: "", edad: "" });
+    const userId = formdatas[edit].id;
+    fetch(`http://127.0.0.1:5000/usuarios/${userId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nombre: formulario.nombre,
+        edad: formulario.edad,
+        correo: formulario.correo,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setDatas(
+            formdatas.map((form, i) => (i === edit ? { ...formulario } : form))
+          );
+          setEdit(null);
+          setFormulario({ nombre: "", correo: "", edad: "" });
+        }
+      });
   };
 
   const handleDelete = (index) => {
-    setDatas(formdatas.filter((form, v) => v !== index));
+    const userId = formdatas[index].id;
+    fetch(`http://127.0.0.1:5000/delete/${userId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setDatas(formdatas.filter((form, v) => v !== index));
+        } else if (data.error) {
+          alert("No se puede eliminar el usuario");
+        }
+      });
   };
 
   const handleSearch = (e) => {
@@ -144,7 +173,7 @@ export const Form = () => {
                 }}
               />
             </ul>
-            <button id="boton">Send</button>
+            <button id="boton">Enviar</button>
           </ul>
         </form>
         <table id="result">
