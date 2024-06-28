@@ -42,7 +42,6 @@ def get_formularios():
             get_formularios = FormulariosUser(nombre, correo, edad)
             session.add(get_formularios)
             session.commit()
-            session.close()
             return jsonify({nombre: nombre, correo: correo, edad: edad})
 
 
@@ -53,6 +52,32 @@ def registrados():
         users = session.query(FormulariosUser).all()
         data = [{"id": user.id, "nombre": user.nombre, "correo": user.correo, "edad": user.edad} for user in users]
         return jsonify(data)
+    
+@app.route('/delete', methods=['DELETE'])
+def eliminar_usuarios(user_id):
+    if request.method == 'DELETE':
+        session = Session()
+        users = session.query(FormulariosUser).get(user_id)
+        if users:
+            session.delete(users)
+            session.commit()
+            session.close()
+            return jsonify({'message': 'Usuario Eliminado Correctamente'})
+    
+@app.route('/usuarios/<user_id>', methods=['PUT'])
+def actualizar_usuarios(user_id):
+    if request.method == 'PUT':
+        session = Session()
+        users = session.query(FormulariosUser).get(user_id)
+        if users:
+            data = request.json
+            users.nombre = data.get('nombre', users.nombre)
+            users.correo = data.get('correo', users.correo)
+            users.edad = data.get('edad', users.edad)
+            session.commit()
+            session.close()
+            return jsonify({'message': 'Se actualizo correctamente'})
+
 
 if __name__ == '__main__':
     app.run(debug=True)
