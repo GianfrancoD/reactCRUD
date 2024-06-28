@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./form.css";
+import { useEffect } from "react";
 
 export const Form = () => {
   const [formdatas, setDatas] = useState([]);
@@ -19,7 +20,11 @@ export const Form = () => {
 
     fetch("http://127.0.0.1:5000/admin", {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        cache: "no-cache",
+      },
       body: JSON.stringify(formulario),
     })
       .then((response) => response.json())
@@ -67,10 +72,21 @@ export const Form = () => {
     );
   });
 
+  useEffect(() => {
+    handleGetUsers();
+  }, []);
+  const handleGetUsers = () => {
+    fetch("http://127.0.0.1:5000/usuarios")
+      .then((res) => res.json())
+      .then((data) => setDatas(data));
+  };
+
   return (
     <>
       <header className="headersearch">
-        <span className="material-symbols-outlined">search</span>
+        <span className="material-symbols-outlined" id="logosearch">
+          search
+        </span>
         <input
           type="search"
           className="search"
@@ -134,15 +150,17 @@ export const Form = () => {
         <table id="result">
           <thead>
             {formdatas.length > 0 ? (
-              <p>
-                Existe un total de: <b id="total">{formdatas.length}</b>
-              </p>
+              <tr>
+                <th id="total">Existe un total de: {formdatas.length}</th>
+              </tr>
             ) : (
-              <p style={{ color: "red" }}>
-                No hay datos, ingrese datos para ver resultados.
-              </p>
+              <tr>
+                <th style={{ color: "red" }} id="nohay">
+                  No hay datos, ingrese datos para ver resultados.
+                </th>
+              </tr>
             )}
-            <tr>
+            <tr id="tablaN">
               <th>Nombre</th>
               <th>Edad</th>
               <th>Correo</th>
@@ -155,7 +173,7 @@ export const Form = () => {
                 <td>{form.nombre ? truncar(form.nombre) : ""}</td>
                 <td>{form.edad}</td>
                 <td>{form.correo}</td>
-                <td>
+                <td id="botontotal">
                   {edit === index ? (
                     <button id="botones" onClick={handleUpdate}>
                       Actualizar

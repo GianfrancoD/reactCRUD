@@ -160,8 +160,79 @@ table {
       display: flex;
     }
   }
-  #total {
-    font-size: 1.5em;
-    margin: 0.5em;
+}
+
+@media screen and (max-width: 425px) {
+  #mains {
+    border: transparent;
+    box-shadow: none;
+  }
+  #tablaN {
+    display: none !important;
+  }
+  tbody {
+    display: flex;
+    flex-wrap: wrap;
+    tr {
+      display: flex;
+      flex-direction: column;
+    }
+    #botontotal,
+    td {
+      display: flex;
+      width: 15em;
+      place-items: center;
+      place-content: center;
+    }
+    #botones {
+      width: 10rem;
+    }
+    form {
+      margin: -10em;
+    }
+  }
+  #result {
+    margin: -5em;
+  }
+}
+
+@media screen and (min-width: 425px) {
+  #nohay {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  & span {
+    margin: -23em;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  & span {
+    margin: -20.6em;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  & span {
+    margin: -21.7em;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  & span {
+    margin: -13.6em;
+  }
+}
+@media screen and (min-width: 1024px) {
+  & span {
+    margin: -8em;
+  }
+}
+@media screen and (min-width: 1440px) {
+  & span {
+    margin: 0.6em;
   }
 }
