@@ -87,7 +87,21 @@ export const Form = () => {
   };
 
   const handleSearch = (e) => {
+    const searchValue = e.target.value;
     setSearch(e.target.value);
+
+    if (searchValue !== "") {
+      fetch(`http://127.0.0.1:5000/buscar/${searchValue}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => setDatas(data));
+    } else {
+      handleGetUsers();
+    }
   };
 
   const filteredFormdatas = formdatas.filter((form) => {
