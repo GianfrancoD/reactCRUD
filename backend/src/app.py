@@ -44,7 +44,6 @@ def get_formularios():
             session.commit()
             return jsonify({nombre: nombre, correo: correo, edad: edad})
 
-
 @app.route('/usuarios', methods=['GET'])
 def registrados():
     if request.method == 'GET':
@@ -53,11 +52,11 @@ def registrados():
         data = [{"id": user.id, "nombre": user.nombre, "correo": user.correo, "edad": user.edad} for user in users]
         return jsonify(data)
     
-@app.route('/delete/<int:user_id>', methods=['DELETE'])
-def eliminar_usuarios(user_id):
+@app.route('/delete/<int:userId>', methods=['DELETE'])
+def eliminar_usuarios(userId):
     if request.method == 'DELETE':
         session = Session()
-        users = session.query(FormulariosUser).get(user_id)
+        users = session.query(FormulariosUser).get(userId)
         if users:
             session.delete(users)
             session.commit()
@@ -77,6 +76,14 @@ def actualizar_usuarios(user_id):
             session.commit()
             session.close()
             return jsonify({'message': 'Se actualizo correctamente'})
+        
+@app.route('/buscar/<user_id>', methods=['GET'])
+def buscar_usuario(user_id):
+    if request.method == "GET":
+        session = Session()
+        users = session.query(FormulariosUser).filter(FormulariosUser.nombre.like(f'%{user_id}%')).all()
+        data = [{"id": user.id, "nombre":user.nombre, "correo": user.correo, "edad": user.edad} for user in users]
+        return jsonify(data)
 
 
 if __name__ == '__main__':
