@@ -7,10 +7,10 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-db_name = "oplesk"
-db_user = "gianfranco"
-db_host = "localhost"
-db_port = "5432"
+db_name = ""
+db_user = ""
+db_host = ""
+db_port = ""
 
 engine = create_engine(f'postgresql://{db_user}@{db_host}:{db_port}/{db_name}')
 Session = sessionmaker(bind=engine)
